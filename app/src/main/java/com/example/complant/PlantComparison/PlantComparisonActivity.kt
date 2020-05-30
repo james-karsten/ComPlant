@@ -4,15 +4,12 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.complant.MainActivity
-import com.example.complant.PlantPictures.PlantPicturesActivity
+import com.example.complant.home.MainActivity
 import com.example.complant.R
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.activity_plant_comparison.*
-import kotlinx.android.synthetic.main.activity_plant_statistics.*
-import kotlin.math.sin
 
 class PlantComparisonActivity : AppCompatActivity() {
 

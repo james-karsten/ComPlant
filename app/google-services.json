@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "28783298026",
+    "firebase_url": "https://complant-a874c.firebaseio.com",
+    "project_id": "complant-a874c",
+    "storage_bucket": "complant-a874c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28783298026:android:c5bea63fb986ee03885e93",
+        "android_client_info": {
+          "package_name": "com.example.complant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28783298026-f1n4lu85gipmj8fmt093cj78a52o5gkf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.complant",
+            "certificate_hash": "ca12fc9645da6a99e218b6ac7197eb1cf6a7e218"
+          }
+        },
+        {
+          "client_id": "28783298026-4drhauf5k7pf8322438aiuvogui6bf2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmq4PZ97WB7C-2qgWTdOGeaO9nsrCU8GI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28783298026-4drhauf5k7pf8322438aiuvogui6bf2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

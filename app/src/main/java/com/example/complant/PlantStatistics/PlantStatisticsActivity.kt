@@ -4,7 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.complant.MainActivity
+import com.example.complant.home.MainActivity
 import com.example.complant.PlantPictures.PlantPicturesActivity
 import com.example.complant.R
 import com.jjoe64.graphview.GraphView

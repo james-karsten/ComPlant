@@ -14,7 +14,7 @@
         <activity android:name=".PlantPictures.PlantPicturesActivity" />
         <activity android:name=".PlantStatistics.PlantStatisticsActivity" />
         <activity android:name=".AddPlant.AddPlantActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

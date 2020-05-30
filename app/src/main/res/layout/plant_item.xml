@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="32dp"
+    android:layout_marginBottom="32dp"
     android:background="#C4C4C4">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvPlantName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -17,12 +17,12 @@
         android:text="Plant 1"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlantLength"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tvPlantLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -30,11 +30,11 @@
         android:text="Length"
         android:textColor="#000000"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlantGrowRate"
         app:layout_constraintStart_toEndOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tvPlantGrowRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -42,11 +42,11 @@
         android:text="Growrate per day"
         android:textColor="#000000"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlantSince"
         app:layout_constraintStart_toEndOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/tvPlantSince"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
