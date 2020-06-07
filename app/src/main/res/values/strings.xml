@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ComPlant</string>
+    <string name="tvPlantLength">Length: %1$s</string>
+    <string name="tvPlantGrowRate">Grow rate: %1$s</string>
+    <string name="tvPlantSince">Since: %1$s</string>
+    <string name="plant_statistics">Plant Statistics</string>
 </resources>

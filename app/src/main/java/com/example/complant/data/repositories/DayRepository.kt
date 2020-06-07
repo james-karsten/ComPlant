@@ -29,7 +29,7 @@ class DayRepository(context: Context) {
         dayDao.updateDay(day)
     }
 
-    fun insertPlant(day: Day) {
+    fun insertDay(day: Day) {
         dayDao.insertDay(day)
     }
 }

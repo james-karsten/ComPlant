@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button android:id="@+id/btnAddDay"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:background="#EFEFEF"
+    android:fontFamily="@font/roboto_light"
+    android:stateListAnimator="@null"
+    android:text="+"
+    android:textColor="#5D9254"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -13,9 +13,10 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     private val plantRepository = PlantRepository(application.applicationContext)
     var plants: LiveData<List<Plant>> = plantRepository.getPlants()
+    var plantsWithDays: LiveData<List<Plant>> = plantRepository.getPlants()
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
-    fun deleteGame(plant: Plant) {
+    fun deletePlant(plant: Plant) {
         ioScope.launch {
             plantRepository.deletePlant(plant)
         }

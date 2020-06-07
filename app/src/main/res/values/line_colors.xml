@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Color_1">#ff0000</color>
+    <color name="Color_2">#ff4000</color>
+    <color name="Color_3">#ff8000</color>
+    <color name="Color_4">#ffbf00</color>
+    <color name="Color_5">#ffff00</color>
+    <color name="Color_6">#bfff00</color>
+    <color name="Color_7">#80ff00</color>
+    <color name="Color_8">#40ff00</color>
+    <color name="Color_9">#00ff00</color>
+    <color name="Color_10">#00ff40</color>
+    <color name="Color_11">#00ff80</color>
+    <color name="Color_12">#00ffbf</color>
+    <color name="Color_13">#00ffff</color>
+    <color name="Color_14">#00bfff</color>
+    <color name="Color_15">#0080ff</color>
+    <color name="Color_16">#0040ff</color>
+    <color name="Color_17">#0000ff</color>
+    <color name="Color_18">#4000ff</color>
+    <color name="Color_19">#8000ff</color>
+    <color name="Color_20">#bf00ff</color>
+    <color name="Color_21">#ff00ff</color>
+    <color name="Color_22">#ff00bf</color>
+    <color name="Color_23">#ff0080</color>
+    <color name="Color_24">#ff0040</color>
+</resources>

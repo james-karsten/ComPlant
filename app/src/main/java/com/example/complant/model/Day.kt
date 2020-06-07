@@ -25,6 +25,9 @@ data class Day (
     @ColumnInfo(name = "dayLength")
     var dayLength: Double,
 
+    @ColumnInfo(name = "dayPlantId")
+    val dayPlantId: Long? = null,
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "dayId")
     val dayId: Long? = null

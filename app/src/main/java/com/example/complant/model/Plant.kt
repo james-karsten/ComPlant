@@ -26,9 +26,6 @@ data class Plant (
     @ColumnInfo(name = "since")
     var since: Date?,
 
-    @ColumnInfo(name = "days")
-    var days: List<Day>?,
-
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "plantId")
     val plantId: Long? = null

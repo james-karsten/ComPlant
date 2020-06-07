@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText android:id="@+id/etLength"
+    android:layout_width="5dp"
+    android:layout_height="wrap_content"
+    android:background="#EFEFEF"
+    android:ems="1"
+    android:inputType="number|numberDecimal"
+    android:textAlignment="center"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

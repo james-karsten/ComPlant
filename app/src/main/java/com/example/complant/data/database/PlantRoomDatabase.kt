@@ -13,7 +13,7 @@ import com.example.complant.model.Plant
 
 
 //@Database(entities = [Plant::class, Day::class], version = 1, exportSchema = false)
-@Database(entities = [Plant::class, Day::class], version = 3, exportSchema = false)
+@Database(entities = [Plant::class, Day::class], version = 6, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class PlantRoomDatabase : RoomDatabase() {
 

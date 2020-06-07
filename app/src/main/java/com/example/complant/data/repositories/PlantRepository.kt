@@ -7,6 +7,7 @@ import com.example.complant.data.dao.PlantDao
 import com.example.complant.data.database.PlantRoomDatabase
 import com.example.complant.model.Day
 import com.example.complant.model.Plant
+import com.example.complant.model.PlantWithDays
 
 class PlantRepository(context: Context) {
 
@@ -32,5 +33,17 @@ class PlantRepository(context: Context) {
     fun insertPlant(plant: Plant) {
         plantDao.insertPlant(plant)
     }
+
+    fun getPlantsAndDays() : LiveData<List<PlantWithDays>> {
+        return plantDao.getDaysPlants()
+    }
+
+//    fun getDaysOfPlant(plantId: Long?) : LiveData<List<Day>> {
+//        return plantDao.getDaysOfPlant(plantId)
+//    }
+//
+//    fun insertDaysOfPlant(plantId: Long?, day: Day) {
+//        plantDao.insertDaysOfPlant(plantId, day)
+//    }
 
 }

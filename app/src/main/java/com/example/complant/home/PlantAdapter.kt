@@ -3,13 +3,17 @@ package com.example.complant.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.complant.R
 import com.example.complant.model.Plant
+import com.example.complant.model.PlantWithDays
 import kotlinx.android.synthetic.main.plant_item.view.*
 
 class PlantAdapter(private val plants: List<Plant>) : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
+
+    var onClick: ((plant: Plant) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -30,9 +34,11 @@ class PlantAdapter(private val plants: List<Plant>) : RecyclerView.Adapter<Plant
         fun bind (plant: Plant) {
             itemView.run {
                 tvPlantName.text = plant.name
-                tvPlantLength.text = plant.length.toString()
-                tvPlantGrowRate.text = plant.growRate.toString()
-                tvPlantSince.text = plant.since.toString()
+                tvPlantLength.text = context.getString(R.string.tvPlantLength, plant.length.toString())
+                tvPlantGrowRate.text = context.getString(R.string.tvPlantGrowRate, plant.growRate.toString())
+//                tvPlantSince.text = context.getString(R.string.tvPlantSince, plant.since?.day.toString(), plant.since?.month.toString(), plant.since?.year.toString())
+                tvPlantSince.text = context.getString(R.string.tvPlantSince, plant.since.toString())
+                setOnClickListener { onClick?.invoke(plant) }
             }
         }
     }
