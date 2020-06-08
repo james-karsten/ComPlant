@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -18,16 +17,14 @@ import com.example.complant.home.PLANT_OBJECT
 import com.example.complant.model.Day
 import com.example.complant.model.Plant
 import com.example.complant.model.PlantWithDays
-import com.example.complant.model.WeatherItem
-import com.example.complant.settings.CITY
+import com.example.complant.settings.UPDATED_PLANT
 import com.example.complant.settings.SettingsActivity
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.activity_plant_statistics.*
-import kotlinx.android.synthetic.main.activity_settings.*
 
-const val CITY_REQUEST_CODE = 100
+const val UPDATED_PLANT_REQUEST_CODE = 100
 
 class PlantStatisticsActivity : AppCompatActivity() {
 
@@ -55,6 +52,12 @@ class PlantStatisticsActivity : AppCompatActivity() {
     private fun initViews() {
         tableLayout = findViewById(R.id.tableLayout)
         plant = intent.getParcelableExtra(PLANT_OBJECT)!!
+
+        Log.i("Length plant: ", plant.length.toString())
+        /* if plant wants to use api, get temperature of city */
+        if (plant.useApi) {
+            plantStatisticsActivityViewModel.getWeatherByCity(plant.city)
+        }
 
     }
 
@@ -94,18 +97,19 @@ class PlantStatisticsActivity : AppCompatActivity() {
         if (plantWithDays[plantPosition].days.isNotEmpty()) {
 
             /* loop thru days of the plant */
-            for (i in plantWithDays[plantPosition].days) {
-                /*TODO counter? */
-//                counter++
-//                addRow(counter+1)
+//            for (i in plantWithDays[plantPosition].days) {
+//                /*TODO counter? */
+////                counter++
+////                addRow(counter+1)
+//
+//                rowsToAdd = plantWithDays[plantPosition].days.size
+//                Log.i("Day", rowsToAdd.toString())
+//
+//            }
 
-                /* -1 because the first row is already added*/
-                rowsToAdd = plantWithDays[plantPosition].days.size
-                Log.i("Day", rowsToAdd.toString())
+            /* get size of plants list */
+            rowsToAdd = plantWithDays[plantPosition].days.size
 
-            }
-
-            /* until, because the view has already one row standard */
             for (i in 1..rowsToAdd) {
                 addRow(i, plantWithDays[plantPosition].days.elementAt(i-1))
             }
@@ -186,9 +190,11 @@ class PlantStatisticsActivity : AppCompatActivity() {
             dayOfRow.dayTemperature = temp.text.toString().toDouble()
             dayOfRow.dayWater = water.text.toString().toDouble()
 
-            /* update day */
+            /* update length of updated plant */
             plantStatisticsActivityViewModel.updateDay(dayOfRow)
+            plant.length = dayOfRow.dayLength
 
+            plantStatisticsActivityViewModel.updatePlant(plant)
             /* notify user */
             Toast.makeText(this, "Updated day $currDay", Toast.LENGTH_SHORT).show()
         }
@@ -208,17 +214,12 @@ class PlantStatisticsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /* TODO implement pictures for plant */
-        btnPictures.setOnClickListener {
-            plantStatisticsActivityViewModel.getWeatherByCity("Amsterdam")
-        }
-
         btnNewAdd.setOnClickListener { addDay() }
 
         btnSettings.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             intent.putExtra("PLANT", this.plant)
-            startActivityForResult(intent, CITY_REQUEST_CODE)
+            startActivityForResult(intent, UPDATED_PLANT_REQUEST_CODE)
         }
     }
 
@@ -227,10 +228,16 @@ class PlantStatisticsActivity : AppCompatActivity() {
 
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                CITY_REQUEST_CODE -> {
-                    this.city = data?.getStringExtra(CITY)!!
-                    Toast.makeText(this, "City: ${this.city} set", Toast.LENGTH_SHORT).show()
-                    plantStatisticsActivityViewModel.getWeatherByCity(city)
+                UPDATED_PLANT_REQUEST_CODE -> {
+                    this.plant = data?.getParcelableExtra(UPDATED_PLANT)!!
+                    if (plant.city.isNotBlank() && plant.useApi) {
+                        Toast.makeText(this, "City: ${plant.city} set", Toast.LENGTH_SHORT).show()
+                    } else {
+                        /* clear input field vor temperature */
+                        etNewTemp.setText("")
+                        Toast.makeText(this, "Weather Api disabled", Toast.LENGTH_SHORT).show()
+                    }
+                    plantStatisticsActivityViewModel.getWeatherByCity(plant.city)
                 }
             }
         }
@@ -251,12 +258,15 @@ class PlantStatisticsActivity : AppCompatActivity() {
                 dayPlantId = plant.plantId
             )
 
-            /* TODO update values in itemViewHolder*/
             /* update the length of the plant from the last day */
             plant.length = day.dayLength
+            plantStatisticsActivityViewModel.updatePlant(plant)
+
+            /* insert day in room db and add a new row */
             plantStatisticsActivityViewModel.insertDay(day)
             addRow(getLastDay(), day)
 
+            /* notify user */
             Toast.makeText(this, "Day is saved", Toast.LENGTH_SHORT).show()
 
         } else {

@@ -5,21 +5,19 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.widget.Toast
-import com.example.complant.PlantStatistics.CITY_REQUEST_CODE
+import androidx.activity.viewModels
 import com.example.complant.PlantStatistics.PlantStatisticsActivity
 import com.example.complant.R
-import com.example.complant.home.MainActivity
 import com.example.complant.home.PLANT_OBJECT
 import com.example.complant.model.Plant
 import kotlinx.android.synthetic.main.activity_settings.*
 
-const val CITY = "CITY"
+const val UPDATED_PLANT = "UPDATED_PLANT"
 
 class SettingsActivity : AppCompatActivity() {
 
+    private val settingsActivityViewModel: SettingsActivityViewModel by viewModels()
     private lateinit var plantFromStatistics: Plant
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,54 +28,13 @@ class SettingsActivity : AppCompatActivity() {
         buttonListeners()
     }
 
-    /**
-     * Save instance of saved api
-     */
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
-        Log.i("onSaveInstance: ", "called")
-        outState.putString("location", etCityApi.text.toString())
-        outState.putBoolean("useApi", toggleUseApi.isChecked)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.i("onResume called: ", "")
-
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.i("onResume called: ", "")
-
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.i("onStop called: ", "")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.i("onPause called: ", "")
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i("onDestroy called: ", "")
-
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        toggleUseApi.isChecked = savedInstanceState.getBoolean("useApi")
-        etCityApi.setText(savedInstanceState.getString("location"))
-    }
-
     private fun initViews() {
+        /* get api settings */
         this.plantFromStatistics = intent.getParcelableExtra("PLANT")!!
+        if (plantFromStatistics.useApi) {
+            toggleUseApi.isChecked = plantFromStatistics.useApi
+            etCityApi.setText(plantFromStatistics.city)
+        }
     }
 
     private fun buttonListeners() {
@@ -105,20 +62,23 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         btnSaveSettings.setOnClickListener {
-            sendCity()
+            this.plantFromStatistics.useApi = toggleUseApi.isChecked
+            this.plantFromStatistics.city = etCityApi.text.toString()
+
+            if ((toggleUseApi.isChecked && etCityApi.text.isNotBlank()) or (!toggleUseApi.isChecked)) {
+                settingsActivityViewModel.updatePlant(plantFromStatistics)
+                sendCity()
+            } else {
+                Toast.makeText(this, "please put in a city", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private fun sendCity() {
-        if (toggleUseApi.isChecked) {
-            val city = etCityApi.text.toString()
-            val resultIntent = Intent()
-            resultIntent.putExtra(CITY, city)
-            setResult(Activity.RESULT_OK, resultIntent)
-            finish()
-        } else {
-            Toast.makeText(this, "Enable the weather api", Toast.LENGTH_SHORT).show()
-        }
+        val resultIntent = Intent()
+        resultIntent.putExtra(UPDATED_PLANT, this.plantFromStatistics)
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
     }
 
 }

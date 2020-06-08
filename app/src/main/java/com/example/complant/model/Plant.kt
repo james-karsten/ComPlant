@@ -26,6 +26,12 @@ data class Plant (
     @ColumnInfo(name = "since")
     var since: Date?,
 
+    @ColumnInfo(name = "useApi")
+    var useApi: Boolean,
+
+    @ColumnInfo(name = "city")
+    var city: String,
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "plantId")
     val plantId: Long? = null

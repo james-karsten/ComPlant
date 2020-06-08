@@ -10,6 +10,7 @@ import com.example.complant.R
 import com.example.complant.model.Plant
 import com.example.complant.model.PlantWithDays
 import kotlinx.android.synthetic.main.plant_item.view.*
+import java.time.LocalDate
 
 class PlantAdapter(private val plants: List<Plant>) : RecyclerView.Adapter<PlantAdapter.ViewHolder>() {
 
@@ -34,9 +35,7 @@ class PlantAdapter(private val plants: List<Plant>) : RecyclerView.Adapter<Plant
         fun bind (plant: Plant) {
             itemView.run {
                 tvPlantName.text = plant.name
-                tvPlantLength.text = context.getString(R.string.tvPlantLength, plant.length.toString())
-                tvPlantGrowRate.text = context.getString(R.string.tvPlantGrowRate, plant.growRate.toString())
-//                tvPlantSince.text = context.getString(R.string.tvPlantSince, plant.since?.day.toString(), plant.since?.month.toString(), plant.since?.year.toString())
+                tvPlantKind.text = context.getString(R.string.tvPlantKind, plant.kind)
                 tvPlantSince.text = context.getString(R.string.tvPlantSince, plant.since.toString())
                 setOnClickListener { onClick?.invoke(plant) }
             }

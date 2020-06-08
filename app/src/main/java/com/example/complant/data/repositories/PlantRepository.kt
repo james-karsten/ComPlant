@@ -38,12 +38,7 @@ class PlantRepository(context: Context) {
         return plantDao.getDaysPlants()
     }
 
-//    fun getDaysOfPlant(plantId: Long?) : LiveData<List<Day>> {
-//        return plantDao.getDaysOfPlant(plantId)
+//    fun updatePlantsAndDays(plantsAndDays: List<PlantWithDays>) {
+//        plantDao.updatePlantsAndDays(plantsAndDays)
 //    }
-//
-//    fun insertDaysOfPlant(plantId: Long?, day: Day) {
-//        plantDao.insertDaysOfPlant(plantId, day)
-//    }
-
 }

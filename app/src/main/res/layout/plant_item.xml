@@ -13,11 +13,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Plant 1"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvPlantLength"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlantKind"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,16 +31,16 @@
         android:text="Length"
         android:textColor="#000000"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvPlantGrowRate"
+        app:layout_constraintBottom_toTopOf="@+id/tvPlantKind"
         app:layout_constraintStart_toEndOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/tvPlantGrowRate"
+        android:id="@+id/tvPlantKind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:fontFamily="@font/roboto_light"
-        android:text="Growrate per day"
+        android:text="@string/kind"
         android:textColor="#000000"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/tvPlantSince"

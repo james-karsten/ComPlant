@@ -57,7 +57,9 @@ class AddPlantActivity : AppCompatActivity() {
                 length = etLength.text.toString().toDouble(),
                 kind = etKind.text.toString(),
                 since = date,
-                growRate = 0.0
+                growRate = 0.0,
+                city = "",
+                useApi = false
             )
             viewModel.insertPlant(plant)
         } else {

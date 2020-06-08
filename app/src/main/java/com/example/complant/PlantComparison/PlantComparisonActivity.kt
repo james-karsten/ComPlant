@@ -29,6 +29,8 @@ class PlantComparisonActivity : AppCompatActivity() {
     private val plantsWithDays = arrayListOf<PlantWithDays>()
     private lateinit var graph: GraphView
     private var currColor by Delegates.notNull<Int>()
+    private var alreadyExecuted = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -8,6 +8,7 @@ import com.example.complant.data.repositories.DayRepository
 import com.example.complant.data.repositories.PlantRepository
 import com.example.complant.data.repositories.WeatherRepository
 import com.example.complant.model.Day
+import com.example.complant.model.Plant
 import com.example.complant.model.PlantWithDays
 import com.example.complant.model.WeatherItem
 import kotlinx.coroutines.CoroutineScope
@@ -29,6 +30,12 @@ class PlantStatisticsActivityViewModel(application: Application) : AndroidViewMo
     var plantsAndDays: LiveData<List<PlantWithDays>> = plantRepository.getPlantsAndDays()
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
+
+    fun updatePlant(plant: Plant) {
+        ioScope.launch {
+            plantRepository.updatePlant(plant)
+        }
+    }
 
     fun insertDay(day: Day) {
         ioScope.launch {

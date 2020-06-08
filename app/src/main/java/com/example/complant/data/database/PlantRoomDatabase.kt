@@ -11,9 +11,7 @@ import com.example.complant.data.dao.PlantDao
 import com.example.complant.model.Day
 import com.example.complant.model.Plant
 
-
-//@Database(entities = [Plant::class, Day::class], version = 1, exportSchema = false)
-@Database(entities = [Plant::class, Day::class], version = 6, exportSchema = false)
+@Database(entities = [Plant::class, Day::class], version = 7, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class PlantRoomDatabase : RoomDatabase() {
 

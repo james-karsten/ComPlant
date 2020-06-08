@@ -43,13 +43,6 @@ class MainActivity : AppCompatActivity() {
             this@MainActivity.plants.addAll(plants)
             plantAdapter.notifyDataSetChanged()
         })
-
-//        mainActivityViewModel.plantsWithDays.observe(this, Observer { plantsWithDays ->
-//            this@MainActivity.plantsWithDays.clear()
-//            this@MainActivity.plantsWithDays.addAll(plantsWithDays)
-//            plantAdapter.notifyDataSetChanged()
-//            Log.i("PlantWithDays:", "${plantsWithDays.size}")
-//        })
     }
 
     private fun initViews() {
