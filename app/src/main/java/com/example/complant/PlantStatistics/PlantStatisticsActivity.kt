@@ -28,7 +28,6 @@ const val UPDATED_PLANT_REQUEST_CODE = 100
 
 class PlantStatisticsActivity : AppCompatActivity() {
 
-    private val settingsActivity = SettingsActivity()
     private lateinit var tableLayout: TableLayout
     private val plantStatisticsActivityViewModel: PlantStatisticsActivityViewModel by viewModels()
     private lateinit var series: LineGraphSeries<DataPoint>
@@ -95,18 +94,6 @@ class PlantStatisticsActivity : AppCompatActivity() {
 
         /* check if there are days in the list, otherwise no rows have to be added */
         if (plantWithDays[plantPosition].days.isNotEmpty()) {
-
-            /* loop thru days of the plant */
-//            for (i in plantWithDays[plantPosition].days) {
-//                /*TODO counter? */
-////                counter++
-////                addRow(counter+1)
-//
-//                rowsToAdd = plantWithDays[plantPosition].days.size
-//                Log.i("Day", rowsToAdd.toString())
-//
-//            }
-
             /* get size of plants list */
             rowsToAdd = plantWithDays[plantPosition].days.size
 
@@ -129,7 +116,6 @@ class PlantStatisticsActivity : AppCompatActivity() {
     }
 
     /**
-     * TODO layout verbeteren
      * Adds a new row when a day is saved
      */
     private fun addRow(lastDay: Int, dayOfRow: Day) {
@@ -182,6 +168,7 @@ class PlantStatisticsActivity : AppCompatActivity() {
             Log.i("cuurDay pos:", currDay.toString())
             Log.i("length:", plantsWithDays[plantPosition].days.size.toString())
             Log.i("cuurDay pos:", (currDay+1).toString())
+            Log.i("Last day: ", getLastDay().toString())
 
 
             /* Save all changed values */
@@ -264,6 +251,8 @@ class PlantStatisticsActivity : AppCompatActivity() {
 
             /* insert day in room db and add a new row */
             plantStatisticsActivityViewModel.insertDay(day)
+
+            Log.i("Last day: ", getLastDay().toString())
             addRow(getLastDay(), day)
 
             /* notify user */

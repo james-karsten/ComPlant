@@ -136,12 +136,10 @@ class PlantComparisonActivity : AppCompatActivity() {
         var averageWater = 0.0
         var averageSun = 0.0
         var averageTemp = 0.0
+        var averageGrow = 0.0
 
         val decimalFormat = DecimalFormat("#.##")
         decimalFormat.roundingMode = RoundingMode.CEILING
-
-        /*TODO hoe kan je dit berekenen? */
-        var averageGrow = 0.0
 
         /* accumulates the nutrition data */
         for (i in days.indices) {

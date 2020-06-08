@@ -35,6 +35,7 @@ class PlantAdapter(private val plants: List<Plant>) : RecyclerView.Adapter<Plant
         fun bind (plant: Plant) {
             itemView.run {
                 tvPlantName.text = plant.name
+                tvPlantLength.text = context.getString(R.string.tvPlantLength, plant.length.toString())
                 tvPlantKind.text = context.getString(R.string.tvPlantKind, plant.kind)
                 tvPlantSince.text = context.getString(R.string.tvPlantSince, plant.since.toString())
                 setOnClickListener { onClick?.invoke(plant) }
