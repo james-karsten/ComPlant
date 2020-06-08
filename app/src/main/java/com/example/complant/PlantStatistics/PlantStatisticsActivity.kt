@@ -1,8 +1,10 @@
 package com.example.complant.PlantStatistics
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -16,13 +18,20 @@ import com.example.complant.home.PLANT_OBJECT
 import com.example.complant.model.Day
 import com.example.complant.model.Plant
 import com.example.complant.model.PlantWithDays
+import com.example.complant.model.WeatherItem
+import com.example.complant.settings.CITY
+import com.example.complant.settings.SettingsActivity
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.activity_plant_statistics.*
+import kotlinx.android.synthetic.main.activity_settings.*
+
+const val CITY_REQUEST_CODE = 100
 
 class PlantStatisticsActivity : AppCompatActivity() {
 
+    private val settingsActivity = SettingsActivity()
     private lateinit var tableLayout: TableLayout
     private val plantStatisticsActivityViewModel: PlantStatisticsActivityViewModel by viewModels()
     private lateinit var series: LineGraphSeries<DataPoint>
@@ -30,6 +39,7 @@ class PlantStatisticsActivity : AppCompatActivity() {
     private val plantsWithDays = arrayListOf<PlantWithDays>()
     private var alreadyExecuted = false
     private var plantPosition: Int = 0
+    private lateinit var city: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +48,14 @@ class PlantStatisticsActivity : AppCompatActivity() {
 
         initViews()
         observeViewModel()
-//        plotGraph()
         buttonListeners()
+
     }
 
     private fun initViews() {
         tableLayout = findViewById(R.id.tableLayout)
         plant = intent.getParcelableExtra(PLANT_OBJECT)!!
+
     }
 
     private fun observeViewModel() {
@@ -59,8 +70,12 @@ class PlantStatisticsActivity : AppCompatActivity() {
 
             plotGraph(it)
         })
-    }
 
+        plantStatisticsActivityViewModel.weatherItem.observe(this, Observer {
+            Log.i("Weather:", it.name + " " + it.main.temp)
+            etNewTemp.setText(it.main.temp, TextView.BufferType.EDITABLE)
+        })
+    }
 
     private fun addDayRowAndData(plantWithDays: List<PlantWithDays>) {
 
@@ -80,20 +95,6 @@ class PlantStatisticsActivity : AppCompatActivity() {
 
             /* loop thru days of the plant */
             for (i in plantWithDays[plantPosition].days) {
-//                /**
-//                 * set data of first day in first row
-//                 * Because the first row is standard in this view
-//                 */
-//                if (plantWithDays[plantPosition].days.elementAt(counter) ==
-//                    plantWithDays[plantPosition].days.elementAt(0)) {
-//
-//                    /* first day of plant*/
-//                    val day = plantWithDays[plantPosition].days.elementAt(0)
-//                    etWater.setText(day.dayWater.toString())
-//                    etTemp.setText(day.dayTemperature.toString())
-//                    etLength.setText(day.dayLength.toString())
-//                    etSun.setText(day.daySun.toString())
-//                }
                 /*TODO counter? */
 //                counter++
 //                addRow(counter+1)
@@ -209,11 +210,30 @@ class PlantStatisticsActivity : AppCompatActivity() {
 
         /* TODO implement pictures for plant */
         btnPictures.setOnClickListener {
-//            val intent = Intent(this, PlantPicturesActivity::class.java)
-//            startActivity(intent)
+            plantStatisticsActivityViewModel.getWeatherByCity("Amsterdam")
         }
 
         btnNewAdd.setOnClickListener { addDay() }
+
+        btnSettings.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            intent.putExtra("PLANT", this.plant)
+            startActivityForResult(intent, CITY_REQUEST_CODE)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                CITY_REQUEST_CODE -> {
+                    this.city = data?.getStringExtra(CITY)!!
+                    Toast.makeText(this, "City: ${this.city} set", Toast.LENGTH_SHORT).show()
+                    plantStatisticsActivityViewModel.getWeatherByCity(city)
+                }
+            }
+        }
     }
 
     /**

@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.complant.model.PlantWithDays
+import com.example.complant.settings.SettingsActivity
 
 const val PLANT_OBJECT = "PLANT_OBJECT"
 
@@ -73,6 +74,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, PlantComparisonActivity::class.java)
             startActivity(intent)
         }
+
+
 
     }
 
